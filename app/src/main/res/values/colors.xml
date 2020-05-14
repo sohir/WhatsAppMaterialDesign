@@ -3,4 +3,8 @@
     <color name="colorPrimary">#06554c</color>
     <color name="colorPrimaryDark">#033b34</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="textPopupColor">#000000</color>
+    <color name="backgroundActionMode">#4CAF50</color>
+
 </resources>

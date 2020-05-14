@@ -8,14 +8,32 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-<com.google.android.material.tabs.TabLayout
+    <androidx.appcompat.widget.Toolbar
+    android:id="@+id/whatsToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:theme="@style/muToolbarTheme"
+    app:popupTheme="@style/myPopupTheme"/>
+
+    <com.google.android.material.tabs.TabLayout
     android:id="@+id/tabLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/showContextual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contextual" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
