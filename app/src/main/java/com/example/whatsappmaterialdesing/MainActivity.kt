@@ -9,8 +9,9 @@ import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
-//If we working on navigation components and framgent use this
-//https://developer.android.com/guide/navigation/navigation-swipe-view-2#kotlin
+/*If we working on navigation components and framgent use this
+https://developer.android.com/guide/navigation/navigation-swipe-view-2#kotlin
+https://developer.android.com/training/animation/screen-slide-2*/
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
