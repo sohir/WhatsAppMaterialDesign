@@ -3,10 +3,11 @@ package com.example.whatsappmaterialdesing
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,14 +16,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         whatsToolbar.title = "WhatsApp"
         setSupportActionBar(whatsToolbar)
+        val adapter = Pager2Adapter(supportFragmentManager,lifecycle)
+        viewPager.adapter = adapter
+        TabLayoutMediator(tabLayout,viewPager){
+            tab, position ->
+           tab.text =  when(position){
+               0 -> "Chats"
+               1->"Calls"
+               2->"Status"
+               else -> "Chats"
+            }
+        }.attach()
+        
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                Toast.makeText(this@MainActivity,"Reselected ${tab?.text}",Toast.LENGTH_SHORT).show()
+            }
 
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        viewPagerAdapter.addFragment(ChatFragment(),"Chats")
-        viewPagerAdapter.addFragment(CalsFragment(),"Calls")
-        viewPagerAdapter.addFragment(StatusFragment(),"Status")
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                Toast.makeText(this@MainActivity,"unselected ${tab?.text}",Toast.LENGTH_SHORT).show()
+            }
 
-        viewPager.adapter = viewPagerAdapter
-        tabLayout.setupWithViewPager(viewPager)
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                Toast.makeText(this@MainActivity,"selected ${tab?.text}",Toast.LENGTH_SHORT).show()
+
+            }
+        })
+//        viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
+//        viewPager.beginFakeDrag()
+//        viewPager.fakeDragBy(-10f)
+//        viewPager.endFakeDrag()
+
+
         tabLayout.setTabTextColors(Color.parseColor("#84AFAB"),Color.parseColor("#FFFFFF"))
         showContextual.setOnClickListener {
              startSupportActionMode(ContextualMenu())
