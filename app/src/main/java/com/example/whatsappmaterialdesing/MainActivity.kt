@@ -3,21 +3,33 @@ package com.example.whatsappmaterialdesing
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 /*If we working on navigation components and framgent use this
 https://developer.android.com/guide/navigation/navigation-swipe-view-2#kotlin
 https://developer.android.com/training/animation/screen-slide-2*/
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         whatsToolbar.title = "WhatsApp"
         setSupportActionBar(whatsToolbar)
+        val actionToggle = ActionBarDrawerToggle(this,
+        mDrawerLayout,
+        whatsToolbar,
+        R.string.drawer_open,
+        R.string.drawer_close)
+        mDrawerLayout.addDrawerListener(actionToggle)
+        actionToggle.syncState()
+        mNavigationView.setNavigationItemSelectedListener ( this )
         val adapter = Pager2Adapter(supportFragmentManager,lifecycle)
         viewPager.adapter = adapter
         TabLayoutMediator(tabLayout,viewPager){
@@ -100,6 +112,23 @@ class MainActivity : AppCompatActivity() {
             mode?.finish()
         }
 
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+      //After clicked on any item show its name then close the navigationDrawer
+        Toast.makeText(this,"${item.title} Clicked",Toast.LENGTH_SHORT).show()
+        closeDrawer()
+        return true
+    }
+    private fun  closeDrawer(){
+        mDrawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+    override fun onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+            closeDrawer()
+        else
+        super.onBackPressed()
     }
 }
 
